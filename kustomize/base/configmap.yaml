@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-node-doctor-config
+  labels:
+    app.kubernetes.io/name: k8s-node-doctor
+    app.kubernetes.io/instance: k8s-node-doctor
+    app.kubernetes.io/managed-by: Kustomize
+data:
+  dc_number: "Test"
+  cluster_name: "Test-Cluster"
+  slack_enabled: "true"
+  email_enabled: "false"
+  endpoints.yaml: |-

@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+metadata:
+  name: k8s-node-doctor
+build:
+  artifacts:
+    - image: k8s-node-doctor
+      docker:
+         dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+deploy:
+   kustomize:
+     paths: ["kustomize/overlays/dev"]

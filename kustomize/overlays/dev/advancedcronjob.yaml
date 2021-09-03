@@ -1,0 +1,6 @@
+apiVersion: apps.kruise.io/v1alpha1
+kind: AdvancedCronJob
+metadata:
+  name: k8s-node-doctor
+spec:
+  schedule: "0 12 * * *"

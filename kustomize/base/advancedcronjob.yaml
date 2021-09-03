@@ -1,0 +1,59 @@
+apiVersion: apps.kruise.io/v1alpha1
+kind: AdvancedCronJob
+metadata:
+  name: k8s-node-doctor
+spec:
+  schedule: "0 12 * * *"
+  template:
+    broadcastJobTemplate:
+      spec:
+        template:
+          spec:
+            serviceAccount: k8s-node-doctor
+            imagePullSecrets:
+              - name: <image-pull-secret-regcred>
+            containers:
+              - name: k8s-node-doctor
+                image: <Docker hub Image:tag>
+                imagePullPolicy: Always
+                volumeMounts:
+                  - name: k8s-node-doctor-config-volume
+                    mountPath: /config
+                env:
+                  - name: DC_NUMBER
+                    valueFrom:
+                      configMapKeyRef:
+                        name: k8s-node-doctor-config
+                        key: dc_number
+                  - name: CLUSTER_NAME
+                    valueFrom:
+                      configMapKeyRef:
+                        name: k8s-node-doctor-config
+                        key: cluster_name
+                  - name: SLACK_ENABLED
+                    valueFrom:
+                      configMapKeyRef:
+                        name: k8s-node-doctor-config
+                        key: slack_enabled
+                  - name: EMAIL_ENABLED
+                    valueFrom:
+                      configMapKeyRef:
+                        name: k8s-node-doctor-config
+                        key: email_enabled
+                  - name: MY_NODE_NAME
+                    valueFrom:
+                      fieldRef:
+                        fieldPath: spec.nodeName
+                  - name: PYTHONUNBUFFERED
+                    value: "0"
+                resources:
+                  limits:
+                    memory: 200Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+            volumes:
+              - name: k8s-node-doctor-config-volume
+                configMap:
+                  name: k8s-node-doctor-config
+            restartPolicy: Never

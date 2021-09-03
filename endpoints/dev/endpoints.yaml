@@ -1,0 +1,10 @@
+hosts:
+  localhost:
+    google.com: 443,443,443,443,443,443
+    www.facebook.com: 443
+  lms:
+  mobile:
+  bz:
+    127.0.0.1: 3036,9001,6942
+    localhost: 6942
+    google.com: 443

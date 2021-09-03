@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-node-doctor-config
+data:
+  dc_number: "dev"
+  cluster_name: "Kind-cluster"
+  slack_enabled: "true"
+  email_enabled: "false"
