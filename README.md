@@ -73,7 +73,5 @@ The output format in slack ensures that -
 # Note 
  This repo will evolve with multiple applications (in the future) that can ease work for Platform and App operations teams.
 
-# Jenkins job to push the image to Golden repo 
+# Jenkins job to push the image to docker hub
   
-# Jenkins Job to push the image to Public Endpoint registry 
-
